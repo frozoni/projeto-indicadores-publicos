@@ -5,27 +5,48 @@ env/
 
 # Python
 __pycache__/
-*.pyc
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
 .ipynb_checkpoints/
+
+# Variáveis e credenciais
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+secrets.json
+credentials.json
 
 # Spark
 spark-warehouse/
 metastore_db/
 derby.log
 
-# Dados (mantenha só amostras pequenas versionadas, se quiser)
+# Dados gerados pelas APIs
 **/data/raw/*.json
 !**/data/raw/.gitkeep
 **/data/processed/*.parquet
 **/data/processed/*.csv
 !**/data/processed/.gitkeep
+**/dados/*
+!**/dados/.gitkeep
 
-# Power BI (arquivos temporários)
+# Arquivos temporários
+*.tmp
+*.temp
+*.log
+~$*
+
+# Power BI
 *.pbix.bak
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
+**/.pbi/*.abf
 
-# OS
+# Sistema operacional e editor
 .DS_Store
 Thumbs.db
-
-# Editor
 .vscode/
