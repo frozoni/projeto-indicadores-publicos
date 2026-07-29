@@ -1,0 +1,202 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "90b603f94690a9374595",
+  "position": {
+    "x": 1082.8571428571429,
+    "y": 1527.1428571428573,
+    "z": 21000,
+    "height": 364.28571428571433,
+    "width": 864.28571428571433,
+    "tabOrder": 21000
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Columns": {
+          "projections": [
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "PropertyVariationSource": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "ipca_area_mes"
+                            }
+                          },
+                          "Name": "Variation",
+                          "Property": "data_referencia"
+                        }
+                      },
+                      "Hierarchy": "Hierarquia de datas"
+                    }
+                  },
+                  "Level": "Ano"
+                }
+              },
+              "queryRef": "ipca_area_mes.data_referencia.Variation.Hierarquia de datas.Ano",
+              "nativeQueryRef": "data_referencia Ano",
+              "active": true
+            }
+          ]
+        },
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ipca_area_mes"
+                    }
+                  },
+                  "Property": "area_ipca"
+                }
+              },
+              "queryRef": "ipca_area_mes.area_ipca",
+              "nativeQueryRef": "area_ipca",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ipca_area_mes"
+                    }
+                  },
+                  "Property": "grupo_ipca"
+                }
+              },
+              "queryRef": "ipca_area_mes.grupo_ipca",
+              "nativeQueryRef": "grupo_ipca",
+              "active": true
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "ipca_area_mes"
+                        }
+                      },
+                      "Property": "acumulado_12_meses_pct"
+                    }
+                  },
+                  "Function": 3
+                }
+              },
+              "queryRef": "Min(ipca_area_mes.acumulado_12_meses_pct)",
+              "nativeQueryRef": "acumulado_12_meses_pct"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Aggregation": {
+                "Expression": {
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "ipca_area_mes"
+                      }
+                    },
+                    "Property": "grupo_ipca"
+                  }
+                },
+                "Function": 5
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "expansionStates": [
+      {
+        "roles": [
+          "Rows"
+        ],
+        "levels": [
+          {
+            "queryRefs": [
+              "ipca_area_mes.area_ipca"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ipca_area_mes"
+                    }
+                  },
+                  "Property": "area_ipca"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "ipca_area_mes.grupo_ipca"
+            ],
+            "isCollapsed": true,
+            "isPinned": true
+          }
+        ],
+        "root": {
+          "children": [
+            {
+              "identityValues": [
+                {
+                  "Literal": {
+                    "Value": "'Belém - PA'"
+                  }
+                }
+              ],
+              "isToggled": true
+            }
+          ]
+        }
+      }
+    ],
+    "objects": {
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "224.142854254474D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "ipca_area_mes.area_ipca"
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {}
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

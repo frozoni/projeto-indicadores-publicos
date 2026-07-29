@@ -1,0 +1,112 @@
+table ipca_area_mes
+	lineageTag: 45b1e10b-02a0-4dc9-bb62-d8b50765ba50
+
+	column data_referencia
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: c3d284bd-1980-4193-8c28-e0e100b39313
+		summarizeBy: none
+		sourceColumn: data_referencia
+
+		variation Variation
+			isDefault
+			relationship: b6dec914-1db0-4b86-98bd-7c57dcb5563d
+			defaultHierarchy: LocalDateTable_8fd5846c-a63c-4871-8215-fb5c36f7fb7d.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column ano
+		dataType: int64
+		formatString: 0
+		lineageTag: d843c07d-7b71-45e6-9b26-84fe79e89e33
+		summarizeBy: none
+		sourceColumn: ano
+
+		annotation SummarizationSetBy = User
+
+	column mes
+		dataType: int64
+		formatString: 0
+		lineageTag: cdd04d5f-a3b6-4272-aaff-c7a7c3030520
+		summarizeBy: none
+		sourceColumn: mes
+
+		annotation SummarizationSetBy = User
+
+	column area_ipca_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 217d3435-f299-4fdf-be4f-4eb2748370ff
+		summarizeBy: none
+		sourceColumn: area_ipca_id
+
+		annotation SummarizationSetBy = User
+
+	column area_ipca
+		dataType: string
+		lineageTag: bf222dfd-be67-4c0c-8610-35cac7deb753
+		summarizeBy: none
+		sourceColumn: area_ipca
+
+		annotation SummarizationSetBy = Automatic
+
+	column nivel_id
+		dataType: string
+		lineageTag: 7274efc9-a9b7-4ed4-a492-c481fada2686
+		summarizeBy: none
+		sourceColumn: nivel_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column grupo_ipca
+		dataType: string
+		lineageTag: 25b5afc4-8e98-48e1-9b8d-66e4609c5de4
+		summarizeBy: none
+		sourceColumn: grupo_ipca
+
+		annotation SummarizationSetBy = Automatic
+
+	column variacao_mensal_pct
+		dataType: string
+		lineageTag: f7bb31e2-9e23-4495-b89f-8873efdc82b9
+		summarizeBy: none
+		sourceColumn: variacao_mensal_pct
+
+		annotation SummarizationSetBy = Automatic
+
+	column acumulado_ano_pct
+		dataType: string
+		lineageTag: e3ff956a-5d37-4705-9f93-f11805165251
+		summarizeBy: none
+		sourceColumn: acumulado_ano_pct
+
+		annotation SummarizationSetBy = Automatic
+
+	column acumulado_12_meses_pct
+		dataType: string
+		lineageTag: b861eff2-0f4b-4f9a-ace0-fe386fd995f9
+		summarizeBy: none
+		sourceColumn: acumulado_12_meses_pct
+
+		annotation SummarizationSetBy = Automatic
+
+	column peso_mensal_pct
+		dataType: string
+		lineageTag: 4c98527c-ba47-4237-8b48-351a1cad226a
+		summarizeBy: none
+		sourceColumn: peso_mensal_pct
+
+		annotation SummarizationSetBy = Automatic
+
+	partition ipca_area_mes = m
+		mode: import
+		source =
+				let
+				  Origem = Csv.Document(File.Contents("C:\Users\Gabriel\Desktop\Python_Treinamento\IBGE\data\processed\ipca_area_mes.csv"), [Delimiter = ",", Columns = 11, Encoding = 65001, QuoteStyle = QuoteStyle.None]),
+				  #"Cabeçalhos promovidos" = Table.PromoteHeaders(Origem, [PromoteAllScalars = true]),
+				  #"Tipo de coluna alterado" = Table.TransformColumnTypes(#"Cabeçalhos promovidos", {{"data_referencia", type date}, {"ano", Int64.Type}, {"mes", Int64.Type}, {"area_ipca_id", Int64.Type}, {"area_ipca", type text}, {"nivel_id", type text}, {"grupo_ipca", type text}, {"variacao_mensal_pct", type text}, {"acumulado_ano_pct", type text}, {"acumulado_12_meses_pct", type text}, {"peso_mensal_pct", type text}})
+				in
+				  #"Tipo de coluna alterado"
+

@@ -1,0 +1,46 @@
+table dim_uf
+	lineageTag: 578f47d4-a082-4d47-b477-c43d3f478048
+
+	column uf_id
+		dataType: int64
+		formatString: 0
+		lineageTag: c0cc5446-3c9e-4ad2-bdc9-00ba75480956
+		summarizeBy: none
+		sourceColumn: uf_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column uf_sigla
+		dataType: string
+		lineageTag: 0895ffcf-1b1c-4c65-84c8-2eaee2e16975
+		summarizeBy: none
+		sourceColumn: uf_sigla
+
+		annotation SummarizationSetBy = Automatic
+
+	column uf_nome
+		dataType: string
+		lineageTag: 95d3a5ff-1e99-4538-9328-a6f184431f44
+		summarizeBy: none
+		sourceColumn: uf_nome
+
+		annotation SummarizationSetBy = Automatic
+
+	column regiao
+		dataType: string
+		lineageTag: c269418d-067d-441a-a3bd-edba260a191c
+		summarizeBy: none
+		sourceColumn: regiao
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_uf = m
+		mode: import
+		source =
+				let
+				  Origem = Csv.Document(File.Contents("C:\Users\Gabriel\Desktop\Python_Treinamento\IBGE\data\processed\dim_uf.csv"), [Delimiter = ",", Columns = 4, Encoding = 65001, QuoteStyle = QuoteStyle.None]),
+				  #"Cabeçalhos promovidos" = Table.PromoteHeaders(Origem, [PromoteAllScalars = true]),
+				  #"Tipo de coluna alterado" = Table.TransformColumnTypes(#"Cabeçalhos promovidos", {{"uf_id", Int64.Type}, {"uf_sigla", type text}, {"uf_nome", type text}, {"regiao", type text}})
+				in
+				  #"Tipo de coluna alterado"
+

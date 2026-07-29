@@ -1,0 +1,113 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 0,
+            "y": 0
+          },
+          "nodeIndex": "populacao_municipio",
+          "nodeLineageTag": "9fbe338b-0908-4861-8b41-eb60dfa17262",
+          "size": {
+            "height": 477.93528607142144,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 284,
+            "y": 50
+          },
+          "nodeIndex": "resumo_ano",
+          "nodeLineageTag": "b2ff35e5-1c3d-4786-be38-d3c7f25592c9",
+          "size": {
+            "height": 341,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 568,
+            "y": 50
+          },
+          "nodeIndex": "desemprego_uf_trimestre",
+          "nodeLineageTag": "c1103e61-627b-4592-bb57-9e0cf1348ebb",
+          "size": {
+            "height": 345.25274675114792,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 852,
+            "y": 50
+          },
+          "nodeIndex": "faixa_etaria_uf",
+          "nodeLineageTag": "ef778525-4cf5-4a30-aabf-e6a9e5eaf925",
+          "size": {
+            "height": 351.53785046658516,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 1136,
+            "y": 50
+          },
+          "nodeIndex": "ipca_area_mes",
+          "nodeLineageTag": "45b1e10b-02a0-4dc9-bb62-d8b50765ba50",
+          "size": {
+            "height": 411.87484613478244,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 519.97314794939109,
+            "y": 671.37423067391182
+          },
+          "nodeIndex": "dim_uf",
+          "nodeLineageTag": "578f47d4-a082-4d47-b477-c43d3f478048",
+          "size": {
+            "height": 216.22466377879823,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 1090.66056531109,
+            "y": 542.29211875283227
+          },
+          "nodeIndex": "pib_brasil_ano",
+          "nodeLineageTag": "4a675245-b794-44f1-9de6-45aeb8b8e25b",
+          "size": {
+            "height": 325.93528607142139,
+            "width": 234
+          },
+          "zIndex": 7
+        }
+      ],
+      "name": "Todas as tabelas",
+      "zoomValue": 79.553182037699813,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Todas as tabelas",
+  "defaultDiagram": "Todas as tabelas"
+}

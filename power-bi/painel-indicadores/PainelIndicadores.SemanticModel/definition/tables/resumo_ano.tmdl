@@ -1,0 +1,92 @@
+table resumo_ano
+	lineageTag: b2ff35e5-1c3d-4786-be38-d3c7f25592c9
+
+	measure 'Crescimento Médio %' = AVERAGE(populacao_municipio[crescimento_pct])
+		lineageTag: e59e6ee9-6342-47bf-8717-2bed3184d2e8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Variação Absoluta Total' = SUM(populacao_municipio[variacao_absoluta])
+		formatString: 0.000
+		lineageTag: 777eeafb-eb7d-4d7c-b48b-b27f74c138ff
+
+	column ano
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ac981697-5b83-4691-9f2e-66d5d8d34bb3
+		summarizeBy: none
+		sourceColumn: ano
+
+		variation Variation
+			isDefault
+			relationship: a63d7b87-60c7-49df-946e-312e56a9d4f2
+			defaultHierarchy: LocalDateTable_9b4d4d5e-e927-48ab-bc2c-3acdd1cde4bf.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column populacao_total
+		dataType: int64
+		formatString: 0.000
+		lineageTag: 903397b2-35f5-499c-9694-b7f42e49a807
+		summarizeBy: none
+		sourceColumn: populacao_total
+
+		annotation SummarizationSetBy = User
+
+	column qtd_municipios
+		dataType: int64
+		formatString: 0.000
+		lineageTag: 856b254e-979c-4ffa-aea3-381703e85270
+		summarizeBy: none
+		sourceColumn: qtd_municipios
+
+		annotation SummarizationSetBy = User
+
+	column crescimento_medio_pct
+		dataType: int64
+		formatString: 0
+		lineageTag: 2261eed7-2855-4e9b-bd79-8b1e598346b1
+		summarizeBy: none
+		sourceColumn: crescimento_medio_pct
+
+		annotation SummarizationSetBy = User
+
+	column variacao_absoluta_total
+		dataType: int64
+		formatString: 0
+		lineageTag: d957b143-4480-4b17-abf7-1c7fc152a09d
+		summarizeBy: none
+		sourceColumn: variacao_absoluta_total
+
+		annotation SummarizationSetBy = User
+
+	column 'Cor Regiao' =
+			
+			SWITCH(
+			    SELECTEDVALUE(populacao_municipio[regiao]),
+			    "Norte", "#eb6834",
+			    "Nordeste", "#e87ba4",
+			    "Centro-Oeste", "#eda100",
+			    "Sudeste", "#2a78d6",
+			    "Sul", "#1baf7a",
+			    "#898781"
+			)
+		lineageTag: 8b361882-1fcd-45ed-8086-8b0a03a5c7fc
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition resumo_ano = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents("C:\Users\Gabriel\Desktop\Python_Treinamento\IBGE\data\processed\resumo_ano.csv"),[Delimiter=",", Columns=5, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"ano", type date}, {"populacao_total", Int64.Type}, {"qtd_municipios", Int64.Type}, {"crescimento_medio_pct", Int64.Type}, {"variacao_absoluta_total", Int64.Type}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_ResultType = Table
+

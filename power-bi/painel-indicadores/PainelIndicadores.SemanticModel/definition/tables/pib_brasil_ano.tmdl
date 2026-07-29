@@ -1,0 +1,73 @@
+table pib_brasil_ano
+	lineageTag: 4a675245-b794-44f1-9de6-45aeb8b8e25b
+
+	column ano
+		dataType: int64
+		formatString: 0
+		lineageTag: 285cb32e-b8cc-4844-b7b4-501ebfc3de5a
+		summarizeBy: none
+		sourceColumn: ano
+
+		annotation SummarizationSetBy = User
+
+	column localidade_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 4ebb2211-e973-48b1-8602-a52e049f42e7
+		summarizeBy: none
+		sourceColumn: localidade_id
+
+		annotation SummarizationSetBy = User
+
+	column localidade_nome
+		dataType: string
+		lineageTag: 91491747-1234-4f56-b0ad-1cd4adc1b1dd
+		summarizeBy: none
+		sourceColumn: localidade_nome
+
+		annotation SummarizationSetBy = Automatic
+
+	column variavel_id
+		dataType: int64
+		formatString: 0
+		lineageTag: d4d9241c-382b-4356-b22d-611e6b3823da
+		summarizeBy: none
+		sourceColumn: variavel_id
+
+		annotation SummarizationSetBy = User
+
+	column variavel_nome
+		dataType: string
+		lineageTag: a7294cce-7b76-4b6c-a9a4-dd2f43acdab2
+		summarizeBy: none
+		sourceColumn: variavel_nome
+
+		annotation SummarizationSetBy = Automatic
+
+	column unidade
+		dataType: string
+		lineageTag: 396f6290-43c1-4ca7-bdb1-68046321355e
+		summarizeBy: none
+		sourceColumn: unidade
+
+		annotation SummarizationSetBy = Automatic
+
+	column valor
+		dataType: int64
+		formatString: 0
+		lineageTag: 07ad1d16-763b-4da3-ad40-033fd1f00192
+		summarizeBy: none
+		sourceColumn: valor
+
+		annotation SummarizationSetBy = User
+
+	partition pib_brasil_ano = m
+		mode: import
+		source =
+				let
+				  Origem = Csv.Document(File.Contents("C:\Users\Gabriel\Desktop\Python_Treinamento\IBGE\data\processed\pib_brasil_ano.csv"), [Delimiter = ",", Columns = 7, Encoding = 65001, QuoteStyle = QuoteStyle.None]),
+				  #"Cabeçalhos promovidos" = Table.PromoteHeaders(Origem, [PromoteAllScalars = true]),
+				  #"Tipo de coluna alterado" = Table.TransformColumnTypes(#"Cabeçalhos promovidos", {{"ano", Int64.Type}, {"localidade_id", Int64.Type}, {"localidade_nome", type text}, {"variavel_id", Int64.Type}, {"variavel_nome", type text}, {"unidade", type text}, {"valor", Int64.Type}})
+				in
+				  #"Tipo de coluna alterado"
+

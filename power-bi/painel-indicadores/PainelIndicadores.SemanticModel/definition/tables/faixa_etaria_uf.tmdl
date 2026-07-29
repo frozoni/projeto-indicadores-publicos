@@ -1,0 +1,95 @@
+table faixa_etaria_uf
+	lineageTag: ef778525-4cf5-4a30-aabf-e6a9e5eaf925
+
+	column ano
+		dataType: int64
+		formatString: 0
+		lineageTag: 837ced70-f188-4873-a21a-1ffe49e48e0e
+		summarizeBy: none
+		sourceColumn: ano
+
+		annotation SummarizationSetBy = User
+
+	column uf_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 2b992836-1406-41a1-b95b-4b4b6e4a8179
+		summarizeBy: none
+		sourceColumn: uf_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column uf_sigla
+		dataType: string
+		lineageTag: db846cde-d43c-4cc7-b90a-0afacada41f5
+		summarizeBy: none
+		sourceColumn: uf_sigla
+
+		annotation SummarizationSetBy = Automatic
+
+	column uf_nome
+		dataType: string
+		lineageTag: aa193feb-dfb0-443a-bb86-3df991c5134c
+		summarizeBy: none
+		sourceColumn: uf_nome
+
+		annotation SummarizationSetBy = Automatic
+
+	column regiao
+		dataType: string
+		lineageTag: a283bfe6-c277-45ec-9baa-f455a065ea53
+		summarizeBy: none
+		sourceColumn: regiao
+
+		annotation SummarizationSetBy = Automatic
+
+	column sexo
+		dataType: string
+		lineageTag: f9460af5-f4e6-40aa-8b83-c5fbf7ef4ecc
+		summarizeBy: none
+		sourceColumn: sexo
+
+		annotation SummarizationSetBy = Automatic
+
+	column faixa_etaria
+		dataType: string
+		lineageTag: a3494fa5-7625-4019-aa3f-0d8951513fbb
+		summarizeBy: none
+		sourceColumn: faixa_etaria
+
+		annotation SummarizationSetBy = Automatic
+
+	column faixa_macro
+		dataType: string
+		lineageTag: 1517fbd3-4e65-47fe-bc72-051016f3c77c
+		summarizeBy: none
+		sourceColumn: faixa_macro
+
+		annotation SummarizationSetBy = Automatic
+
+	column populacao
+		dataType: string
+		lineageTag: 1ba1b281-35f5-4a85-a185-ad890294ae54
+		summarizeBy: none
+		sourceColumn: populacao
+
+		annotation SummarizationSetBy = Automatic
+
+	column participacao_uf_pct
+		dataType: string
+		lineageTag: 469c45c0-32d5-4fe6-9554-6bacf71804fb
+		summarizeBy: none
+		sourceColumn: participacao_uf_pct
+
+		annotation SummarizationSetBy = Automatic
+
+	partition faixa_etaria_uf = m
+		mode: import
+		source =
+				let
+				  Origem = Csv.Document(File.Contents("C:\Users\Gabriel\Desktop\Python_Treinamento\IBGE\data\processed\faixa_etaria_uf.csv"), [Delimiter = ",", Columns = 10, Encoding = 65001, QuoteStyle = QuoteStyle.None]),
+				  #"Cabeçalhos promovidos" = Table.PromoteHeaders(Origem, [PromoteAllScalars = true]),
+				  #"Tipo de coluna alterado" = Table.TransformColumnTypes(#"Cabeçalhos promovidos", {{"ano", Int64.Type}, {"uf_id", Int64.Type}, {"uf_sigla", type text}, {"uf_nome", type text}, {"regiao", type text}, {"sexo", type text}, {"faixa_etaria", type text}, {"faixa_macro", type text}, {"populacao", type text}, {"participacao_uf_pct", type text}})
+				in
+				  #"Tipo de coluna alterado"
+

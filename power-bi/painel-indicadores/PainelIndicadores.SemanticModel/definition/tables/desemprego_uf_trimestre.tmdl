@@ -1,0 +1,129 @@
+table desemprego_uf_trimestre
+	lineageTag: c1103e61-627b-4592-bb57-9e0cf1348ebb
+
+	measure 'Taxa Desemprego Média Anual' =
+			
+			AVERAGEX(
+			    VALUES(desemprego_uf_trimestre[trimestre]),
+			    CALCULATE(
+			        AVERAGE(desemprego_uf_trimestre[taxa_desocupacao_pct])
+			    )
+			)
+		formatString: 0.00
+		lineageTag: c87c1c62-c65f-4ae6-aae6-091f6f32f78e
+
+	measure 'Taxa Desocupaçao Média Anual' =
+			
+			AVERAGEX(
+			    VALUES(desemprego_uf_trimestre[trimestre]),
+			    CALCULATE(
+			        AVERAGE(desemprego_uf_trimestre[taxa_subutilizacao_pct])
+			    )
+			)
+		formatString: 0
+		lineageTag: 40ed37ac-b415-483a-bf38-fa30eba8e23e
+
+	column data_referencia
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 4f3023e3-8831-473c-85fb-ef2fb502aa4d
+		summarizeBy: none
+		sourceColumn: data_referencia
+
+		variation Variation
+			isDefault
+			relationship: d86ff141-0449-4da0-a9f4-eea1d8b51da5
+			defaultHierarchy: LocalDateTable_93d0bb15-df4a-494c-9aa6-3e9fff36b07b.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column ano
+		dataType: int64
+		formatString: 0
+		lineageTag: 789d7577-8725-480d-92c0-a7bbce71c2ab
+		summarizeBy: none
+		sourceColumn: ano
+
+		annotation SummarizationSetBy = User
+
+	column trimestre_num
+		dataType: int64
+		formatString: 0
+		lineageTag: 525b7652-53dc-4f84-a9d4-2bbb1b97db9a
+		summarizeBy: sum
+		sourceColumn: trimestre_num
+
+		annotation SummarizationSetBy = Automatic
+
+	column trimestre
+		dataType: string
+		lineageTag: 1d046ef7-5ace-400b-979c-73e94b56c26e
+		summarizeBy: none
+		sourceColumn: trimestre
+
+		annotation SummarizationSetBy = Automatic
+
+	column uf_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 4ad4453a-450c-402f-8d54-31f324269c6a
+		summarizeBy: none
+		sourceColumn: uf_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column uf_sigla
+		dataType: string
+		lineageTag: 1b316bd5-7963-4575-9e56-5d77b80c6c48
+		summarizeBy: none
+		sourceColumn: uf_sigla
+
+		annotation SummarizationSetBy = Automatic
+
+	column uf_nome
+		dataType: string
+		lineageTag: 438781e8-aaae-4b0a-acfd-2e718574cbf6
+		summarizeBy: none
+		sourceColumn: uf_nome
+
+		annotation SummarizationSetBy = Automatic
+
+	column regiao
+		dataType: string
+		lineageTag: 91980c15-9b6a-4418-9bda-fa853ac2ae2f
+		summarizeBy: none
+		sourceColumn: regiao
+
+		annotation SummarizationSetBy = Automatic
+
+	column taxa_desocupacao_pct
+		dataType: double
+		formatString: 0.00
+		lineageTag: 87c81181-1f39-44b2-a747-18e2bfe8f176
+		summarizeBy: none
+		sourceColumn: taxa_desocupacao_pct
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = User
+
+	column taxa_subutilizacao_pct
+		dataType: string
+		lineageTag: 15b3be5d-9694-48bd-8cc2-d0912795547a
+		summarizeBy: none
+		sourceColumn: taxa_subutilizacao_pct
+
+		annotation SummarizationSetBy = Automatic
+
+	partition desemprego_uf_trimestre = m
+		mode: import
+		source =
+				let
+				  Origem = Csv.Document(File.Contents("C:\Users\Gabriel\Desktop\Python_Treinamento\IBGE\data\processed\desemprego_uf_trimestre.csv"), [Delimiter = ",", Columns = 10, Encoding = 65001, QuoteStyle = QuoteStyle.None]),
+				  #"Cabeçalhos promovidos" = Table.PromoteHeaders(Origem, [PromoteAllScalars = true]),
+				  #"Tipo de coluna alterado" = Table.TransformColumnTypes(#"Cabeçalhos promovidos", {{"data_referencia", type date}, {"ano", Int64.Type}, {"trimestre_num", Int64.Type}, {"trimestre", type text}, {"uf_id", Int64.Type}, {"uf_sigla", type text}, {"uf_nome", type text}, {"regiao", type text}, {"taxa_desocupacao_pct", type text}, {"taxa_subutilizacao_pct", type text}})
+				in
+				  #"Tipo de coluna alterado"
+

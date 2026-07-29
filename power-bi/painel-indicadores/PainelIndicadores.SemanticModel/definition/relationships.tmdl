@@ -1,0 +1,31 @@
+relationship a63d7b87-60c7-49df-946e-312e56a9d4f2
+	joinOnDateBehavior: datePartOnly
+	fromColumn: resumo_ano.ano
+	toColumn: LocalDateTable_9b4d4d5e-e927-48ab-bc2c-3acdd1cde4bf.Date
+
+relationship 26810003-012c-4d56-e9ca-e8f3b66e51f1
+	fromColumn: populacao_municipio.ano
+	toColumn: resumo_ano.ano
+
+relationship d86ff141-0449-4da0-a9f4-eea1d8b51da5
+	joinOnDateBehavior: datePartOnly
+	fromColumn: desemprego_uf_trimestre.data_referencia
+	toColumn: LocalDateTable_93d0bb15-df4a-494c-9aa6-3e9fff36b07b.Date
+
+relationship b6dec914-1db0-4b86-98bd-7c57dcb5563d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: ipca_area_mes.data_referencia
+	toColumn: LocalDateTable_8fd5846c-a63c-4871-8215-fb5c36f7fb7d.Date
+
+relationship AutoDetected_94aa20a2-11bb-426d-9988-d42281f2bf10
+	fromColumn: populacao_municipio.uf_id
+	toColumn: dim_uf.uf_id
+
+relationship AutoDetected_15b0aeba-ed2a-468b-a380-db7a1f5a3768
+	fromColumn: desemprego_uf_trimestre.uf_id
+	toColumn: dim_uf.uf_id
+
+relationship AutoDetected_f7be79d2-2655-4a84-950b-59eac9012088
+	fromColumn: faixa_etaria_uf.uf_id
+	toColumn: dim_uf.uf_id
+

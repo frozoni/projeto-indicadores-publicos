@@ -1,0 +1,131 @@
+table populacao_municipio
+	lineageTag: 9fbe338b-0908-4861-8b41-eb60dfa17262
+
+	measure 'Total acumulado de Contagem de populacao em Ano' =
+			
+			SUM(populacao_municipio[populacao])
+		formatString: 0
+		lineageTag: 1bee5381-ba93-4bf1-a112-d8a5d5508e5c
+
+		extendedProperty MeasureTemplate =
+				{
+				  "version": 0,
+				  "daxTemplateName": "RunningTotal"
+				}
+
+		changedProperty = FormatString
+
+	measure 'Soma Populacao' = SUM(populacao_municipio[populacao])
+		formatString: 0
+		lineageTag: e6d2b355-314a-40fd-943c-ca3f8700840f
+
+	column ano
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: e2fa56ae-19e0-4433-8517-d78334750ba6
+		summarizeBy: none
+		sourceColumn: ano
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column municipio_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 623beca4-efaa-421b-8d54-2b007a985d3a
+		summarizeBy: none
+		sourceColumn: municipio_id
+
+		annotation SummarizationSetBy = User
+
+	column municipio_nome
+		dataType: string
+		lineageTag: 078a8993-4e45-4d1a-80f5-7fc7c5cd8739
+		summarizeBy: none
+		sourceColumn: municipio_nome
+
+		annotation SummarizationSetBy = Automatic
+
+	column uf_id
+		dataType: int64
+		formatString: 0
+		lineageTag: d4bd20b9-b6dc-4c66-b97a-06ee2b7106a1
+		summarizeBy: none
+		sourceColumn: uf_id
+
+		annotation SummarizationSetBy = User
+
+	column uf_sigla
+		dataType: string
+		lineageTag: 1f4870d8-40c1-4442-a81e-03b8543c760c
+		summarizeBy: none
+		sourceColumn: uf_sigla
+
+		annotation SummarizationSetBy = Automatic
+
+	column uf_nome
+		dataType: string
+		lineageTag: 9e9e7ad0-35af-414c-9b52-213c78564f34
+		summarizeBy: none
+		sourceColumn: uf_nome
+
+		annotation SummarizationSetBy = Automatic
+
+	column regiao
+		dataType: string
+		lineageTag: 1e55b81e-bc04-4545-8056-1c02e2c3e4bb
+		summarizeBy: none
+		sourceColumn: regiao
+
+		annotation SummarizationSetBy = Automatic
+
+	column populacao
+		dataType: int64
+		lineageTag: 6114d79c-1fc8-43ca-9310-76377fe2d1fa
+		summarizeBy: none
+		sourceColumn: populacao
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column populacao_ano_anterior
+		dataType: int64
+		formatString: 0
+		lineageTag: 8db1a1d5-7fc1-4b2e-8c14-ea78094c50c1
+		summarizeBy: none
+		sourceColumn: populacao_ano_anterior
+
+		annotation SummarizationSetBy = User
+
+	column variacao_absoluta
+		dataType: int64
+		formatString: 0
+		lineageTag: 0ea93cb9-12bc-445b-8c64-c9c9f044b5ac
+		summarizeBy: none
+		sourceColumn: variacao_absoluta
+
+		annotation SummarizationSetBy = User
+
+	column crescimento_pct
+		dataType: int64
+		formatString: 0
+		lineageTag: 3df439e8-4879-4142-8252-796281bf4683
+		summarizeBy: none
+		sourceColumn: crescimento_pct
+
+		annotation SummarizationSetBy = User
+
+	partition populacao_municipio = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents("C:\Users\Gabriel\Desktop\Python_Treinamento\IBGE\data\processed\populacao_municipio.csv"),[Delimiter=",", Columns=11, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"ano", type date}, {"municipio_id", Int64.Type}, {"municipio_nome", type text}, {"uf_id", Int64.Type}, {"uf_sigla", type text}, {"uf_nome", type text}, {"regiao", type text}, {"populacao", Int64.Type}, {"populacao_ano_anterior", Int64.Type}, {"variacao_absoluta", Int64.Type}, {"crescimento_pct", Int64.Type}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_ResultType = Table
+

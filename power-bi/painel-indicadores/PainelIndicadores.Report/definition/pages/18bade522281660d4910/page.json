@@ -1,0 +1,10 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "18bade522281660d4910",
+  "displayName": "Dica_IBGE",
+  "displayOption": "ActualSize",
+  "height": 240,
+  "width": 320,
+  "visibility": "HiddenInViewMode",
+  "type": "Tooltip"
+}

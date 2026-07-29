@@ -1,0 +1,28 @@
+model Model
+	culture: pt-BR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: pt-BR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["populacao_municipio","resumo_ano","desemprego_uf_trimestre","faixa_etaria_uf","ipca_area_mes","dim_uf","pib_brasil_ano"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table populacao_municipio
+ref table DateTableTemplate_e99390c9-4107-4b24-acd6-5f8419ba9b16
+ref table resumo_ano
+ref table LocalDateTable_9b4d4d5e-e927-48ab-bc2c-3acdd1cde4bf
+ref table desemprego_uf_trimestre
+ref table LocalDateTable_93d0bb15-df4a-494c-9aa6-3e9fff36b07b
+ref table faixa_etaria_uf
+ref table ipca_area_mes
+ref table LocalDateTable_8fd5846c-a63c-4871-8215-fb5c36f7fb7d
+ref table dim_uf
+ref table pib_brasil_ano
+
+ref cultureInfo pt-BR
+
