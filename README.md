@@ -1,41 +1,72 @@
-# Painel de Indicadores Públicos do Brasil
+# Brazilian Public Indicators Dashboard
 
-Projeto de engenharia e análise de dados que integra informações públicas
-de diferentes APIs em um painel central desenvolvido no Power BI.
+A data engineering and analytics project that integrates Brazilian public data
+from multiple APIs into a centralized Power BI dashboard.
 
-## Fontes de dados
+## Data Sources
 
-- IBGE: indicadores populacionais, econômicos e de emprego.
-- BACEN: indicadores financeiros e econômicos.
-- Clima: informações meteorológicas e previsões do tempo.
+- **IBGE** — population, GDP, age distribution, and labor market indicators.
+- **BACEN** — financial and macroeconomic indicators from the Central Bank of Brazil.
+- **Weather services** — weather observations and forecasts.
 
-## Arquitetura
+## Architecture
 
-1. Extração dos dados por meio das APIs.
-2. Tratamento e padronização utilizando Python.
-3. Armazenamento dos dados tratados.
-4. Consumo dos dados pelo Power BI.
-5. Navegação por um menu principal entre as áreas de análise.
+1. Extract data from public APIs.
+2. Preserve API responses in a raw data layer.
+3. Transform and standardize the data with Python and PySpark.
+4. Publish analytics-ready CSV datasets.
+5. Build the semantic model and interactive reports in Power BI.
 
-## Estrutura
+## Project Structure
 
-- `APIs/ibge`: integração com os serviços do IBGE.
-- `APIs/bacen`: integração com os serviços do Banco Central.
-- `APIs/clima-tempo`: integração com os serviços meteorológicos.
-- `power-bi`: relatório e modelo semântico do Power BI.
-- `documentacao`: arquitetura e dicionário de dados.
-- `imagens`: imagens utilizadas no relatório.
+- `APIs/IBGE` — integrations and ETL pipelines for IBGE SIDRA data.
+- `APIs/BACEN` — integrations with the Central Bank of Brazil.
+- `APIs/CLIMA_TEMPO` — integrations with weather data services.
+- `power-bi` — Power BI reports and semantic models.
+- `documentacao` — architecture notes and data dictionaries.
+- `Imagens` — images and visual assets used by the reports.
 
-## Tecnologias
+## Current IBGE Datasets
+
+The IBGE pipeline currently publishes:
+
+- Municipal population estimates.
+- Brazilian GDP and national accounts.
+- Population by age group, sex, and state.
+- Quarterly unemployment and labor underutilization rates.
+- Monthly IPCA inflation indicators by surveyed area and consumption group.
+
+## Technology Stack
 
 - Python
+- PySpark
 - Pandas
-- APIs REST
+- REST APIs
 - Power BI
-- Git
-- GitHub
+- Git and GitHub
 
-## Segurança
+## Running the IBGE Pipeline
 
-Chaves, tokens e credenciais não são armazenados no repositório.
-As configurações locais devem ser mantidas em um arquivo `.env`.
+Open `APIs/IBGE/src/ETL_IBGE.ipynb` and run the cells in order.
+
+By default, the notebook reuses the latest JSON files available in
+`APIs/IBGE/data/raw`. Set `ATUALIZAR_DADOS = True` only when you want to
+request fresh data from the IBGE API.
+
+Processed datasets are written to:
+
+```text
+APIs/IBGE/data/processed
+```
+
+## Data Modeling
+
+The processed datasets are designed for a star-schema model in Power BI.
+Shared dimensions, such as state and calendar tables, can filter multiple fact
+tables without duplicating descriptive attributes.
+
+## Security
+
+API keys, tokens, credentials, and local environment files must not be committed
+to the repository. Store local configuration in a `.env` file and use
+`.env.example` as the public template.
