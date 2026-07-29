@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
-  "name": "fbbed11860089a9dcd80",
+  "name": "6deee0e337066b304d9e",
   "position": {
-    "x": 985.71428571428578,
+    "x": 1184.2857142857144,
     "y": 0,
-    "z": 0,
-    "height": 60.000000000000007,
-    "width": 294.28571428571428,
-    "tabOrder": 0
+    "z": 1,
+    "height": 78.571428571428569,
+    "width": 95.714285714285722,
+    "tabOrder": 1
   },
   "visual": {
     "visualType": "image",
@@ -29,7 +29,7 @@
                     "ResourcePackageItem": {
                       "PackageName": "RegisteredResources",
                       "PackageType": 1,
-                      "ItemName": "voltar9436533661421888.png"
+                      "ItemName": "voltar21683778256425157.png"
                     }
                   }
                 },
@@ -41,12 +41,59 @@
                   }
                 }
               }
+            },
+            "backgroundEnabled": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "strokeShow": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
             }
           }
         }
       ]
     },
     "visualContainerObjects": {
+      "dropShadow": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
       "visualLink": [
         {
           "properties": {
@@ -60,14 +107,14 @@
             "type": {
               "expr": {
                 "Literal": {
-                  "Value": "'Back'"
+                  "Value": "'PageNavigation'"
                 }
               }
             },
             "navigationSection": {
               "expr": {
                 "Literal": {
-                  "Value": "'ad4917f456a6476b4eab'"
+                  "Value": "'77fb2ad4d9187ebb09d9'"
                 }
               }
             }
