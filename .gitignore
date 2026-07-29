@@ -1,0 +1,31 @@
+# Ambiente virtual
+venv/
+.venv/
+env/
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Spark
+spark-warehouse/
+metastore_db/
+derby.log
+
+# Dados (mantenha só amostras pequenas versionadas, se quiser)
+**/data/raw/*.json
+!**/data/raw/.gitkeep
+**/data/processed/*.parquet
+**/data/processed/*.csv
+!**/data/processed/.gitkeep
+
+# Power BI (arquivos temporários)
+*.pbix.bak
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
