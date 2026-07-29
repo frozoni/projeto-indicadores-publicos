@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.venv/
+venv/
+
+# Variáveis e credenciais
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+secrets.json
+credentials.json
+
+# Dados gerados pelas APIs
+**/dados/*
+!**/dados/.gitkeep
+
+# Arquivos temporários
+*.tmp
+*.temp
+*.log
+~$*
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Power BI - configurações locais
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
+**/.pbi/*.abf
+
+# Power BI tradicional
+*.pbix
+*.pbit
+
+# VS Code
+.vscode/
