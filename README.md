@@ -59,6 +59,19 @@ Processed datasets are written to:
 APIs/IBGE/data/processed
 ```
 
+## Running the BACEN Pipeline
+
+On the first run, the pipeline automatically fetches the SGS series because
+the raw layer does not exist yet:
+
+```powershell
+python APIs/BACEN/src/etl_bacen.py
+```
+
+Subsequent runs reuse the latest raw files. Use `--update` to fetch fresh data
+and add `--publish-postgres` to upsert the result into
+`analytics.bacen_serie_historica`. See `APIs/BACEN/README.MD` for parameters.
+
 ## Data Modeling
 
 The processed datasets are designed for a star-schema model in Power BI.
