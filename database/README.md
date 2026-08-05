@@ -3,6 +3,13 @@
 O diretório contém o DDL do schema `analytics` e o carregador dos CSVs
 processados pelo IBGE e pelo BACEN.
 
+> [!WARNING]
+> Os CSVs usados pelo carregador não fazem parte do clone/download normal do
+> GitHub, pois `data/processed/*.csv` está no `.gitignore`. Execute os notebooks
+> ETL ou baixe um snapshot histórico publicado separadamente antes de iniciar a
+> carga. O carregador interrompe a execução se algum arquivo esperado estiver
+> ausente, antes de truncar as tabelas existentes.
+
 ## Pré-requisitos
 
 Configure no `.env` da raiz:

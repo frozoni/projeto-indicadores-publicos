@@ -3,6 +3,18 @@
 A data engineering and analytics project that integrates Brazilian public data
 from multiple APIs into a centralized Power BI dashboard.
 
+> [!WARNING]
+> **The GitHub repository does not contain the generated datasets.** Files under
+> `data/raw` (`.json`) and `data/processed` (`.csv` and `.parquet`) are excluded
+> by `.gitignore`. Cloning or downloading this repository therefore provides
+> the ETL code and Power BI files, but not the local data used during development.
+>
+> The `.pbix` file may open with the last data snapshot embedded when it was
+> saved. However, refreshing the model—and any visual that depends on a missing
+> local source—can fail until the IBGE and BACEN pipelines are executed and the
+> expected files are recreated. Downloading the repository alone does not
+> recreate these ignored datasets.
+
 ## Data Sources
 
 - **IBGE** — population, GDP, age distribution, and labor market indicators.
@@ -83,3 +95,22 @@ tables without duplicating descriptive attributes.
 API keys, tokens, credentials, and local environment files must not be committed
 to the repository. Store local configuration in a `.env` file and use
 `.env.example` as the public template.
+
+## Data availability and historical snapshots
+
+The repository intentionally versions source code, documentation, database DDL,
+and Power BI artifacts—not continuously generated API responses or processed
+datasets. Empty data directories are preserved with `.gitkeep` files.
+
+To refresh the Power BI model after cloning the project:
+
+1. Install the dependencies listed in each API directory.
+2. Run the IBGE pipeline in `APIs/IBGE/src/ETL_IBGE.ipynb`.
+3. Run the BACEN pipeline in `APIs/BACEN/src/ETL_BACEN.ipynb`.
+4. Confirm that the expected CSV files exist under each `data/processed` folder.
+5. Update the Power BI source paths if the project was cloned to another folder.
+
+If a one-time historical dataset needs to be distributed, publish it as a
+versioned GitHub Release asset (for example, a ZIP containing the processed
+CSVs) and link it from this README. This keeps generated files out of normal Git
+history while giving Power BI users a reproducible snapshot to download.

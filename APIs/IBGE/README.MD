@@ -1,5 +1,16 @@
 # ETL IBGE — API SIDRA, PySpark e Power BI
 
+> [!WARNING]
+> **Os dados do IBGE não são enviados normalmente ao GitHub.** Os JSONs de
+> `data/raw` e os CSVs/Parquet de `data/processed` são ignorados pelo Git. Ao
+> clonar ou baixar o repositório, essas pastas conterão apenas os arquivos
+> `.gitkeep`. Execute este ETL antes de atualizar o Power BI.
+>
+> O PBIX pode abrir exibindo o último snapshot que estava incorporado quando foi
+> salvo, mas a atualização do modelo ou visuais dependentes dos arquivos locais
+> pode falhar enquanto os datasets não forem recriados. Também pode ser
+> necessário ajustar os caminhos das fontes no Power BI para o diretório local.
+
 O projeto possui um único ponto de entrada:
 
 ```text
@@ -124,3 +135,10 @@ totalidade da Unidade da Federação.
 
 - API de Agregados: <https://servicodados.ibge.gov.br/api/docs/agregados>
 - SIDRA: <https://sidra.ibge.gov.br/>
+
+## Snapshot histórico para distribuição
+
+Caso seja necessário disponibilizar uma base histórica única junto com o
+painel, publique um ZIP dos CSVs processados como arquivo de uma GitHub Release.
+O snapshot deve informar a data de extração e não substitui a execução do ETL
+para obter dados atualizados.

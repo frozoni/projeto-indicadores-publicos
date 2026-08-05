@@ -1,5 +1,17 @@
 # ETL BACEN — API SGS, PySpark e PostgreSQL
 
+> [!WARNING]
+> **Os dados do BACEN não são enviados normalmente ao GitHub.** Os JSONs de
+> `data/raw` e os CSVs/Parquet de `data/processed` são ignorados pelo Git. Ao
+> clonar ou baixar o repositório, essas pastas conterão apenas os arquivos
+> `.gitkeep`. Execute este ETL antes de atualizar o Power BI ou carregar o
+> PostgreSQL.
+>
+> O PBIX pode abrir exibindo o último snapshot incorporado, mas a atualização do
+> modelo ou visuais dependentes dos arquivos locais pode falhar até que os CSVs
+> sejam recriados. Se o projeto estiver em outro diretório, revise também os
+> caminhos das fontes no Power BI.
+
 O pipeline segue o mesmo desenho do IBGE:
 
 ```text
@@ -52,3 +64,11 @@ python database/load_csv_to_postgres.py --source BACEN
 ```
 
 Fonte oficial: [Portal de Dados Abertos do Banco Central](https://dadosabertos.bcb.gov.br/).
+
+## Snapshot histórico para distribuição
+
+Para disponibilizar uma base histórica única aos usuários do painel, publique
+um ZIP contendo os CSVs processados como arquivo de uma GitHub Release. Informe
+no nome ou na descrição a data de extração. O snapshot permanece separado do
+histórico normal do Git e deve ser baixado e extraído em `data/processed` antes
+de atualizar o Power BI.
