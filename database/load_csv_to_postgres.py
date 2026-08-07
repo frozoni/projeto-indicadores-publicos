@@ -134,10 +134,7 @@ def execute_ddl(connection):
 
 
 def read_csv(config):
-    path = (
-        PROJECT_DIR / "APIs" / config["source"]
-        / "data" / "processed" / config["file"]
-    )
+    path = PROJECT_DIR / "dados" / config["source"] / config["file"]
     if not path.exists():
         raise FileNotFoundError(f"CSV not found: {path}")
     return pd.read_csv(

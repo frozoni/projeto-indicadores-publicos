@@ -251,7 +251,8 @@ def executar_pipeline(
 ):
     bacen_dir = localizar_diretorio_bacen()
     project_dir = bacen_dir.parents[1]
-    raw_dir, processed_dir = bacen_dir / "data" / "raw", bacen_dir / "data" / "processed"
+    raw_dir = bacen_dir / "data" / "raw"
+    processed_dir = project_dir / "dados" / "BACEN"
     raw_dir.mkdir(parents=True, exist_ok=True)
     processed_dir.mkdir(parents=True, exist_ok=True)
     selecionadas = list(series_ativas or SERIES)
