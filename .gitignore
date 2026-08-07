@@ -31,8 +31,6 @@ derby.log
 **/data/processed/*.parquet
 **/data/processed/*.csv
 !**/data/processed/.gitkeep
-**/dados/*
-!**/dados/.gitkeep
 
 # Arquivos temporários
 *.tmp
